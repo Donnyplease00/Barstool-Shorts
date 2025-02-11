@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Your Picture!</title>
+    <title>Upload Your Picture</title>
 </head>
 <body>
     <h1>Upload Your Picture!</h1>
 
-    <!-- Text box for the image URL -->
-    <input type="text" id="imageUrlInput" placeholder="Paste the image URL here" />
-    <button onclick="addImage()">Upload</button>
+    <!-- File input for image upload -->
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="uploadImage()">Upload Image</button>
 
-    <!-- This is where uploaded images will be displayed -->
-    <div id="gallery"></div>
+    <!-- Display area for uploaded image -->
+    <div id="imageDisplay"></div>
 
     <script src="script.js"></script>
 </body>
