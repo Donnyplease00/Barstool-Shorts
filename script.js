@@ -1,19 +1,31 @@
-function addImage() {
-    // Get the value of the image URL from the input field
-    const imageUrl = document.getElementById("imageUrlInput").value;
+function uploadImage() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0]; // Get the file from the input
 
-    // Make sure the user entered something
-    if (!imageUrl) {
-        alert("Please enter a valid image URL!");
+    if (!file) {
+        alert("Please select an image to upload.");
         return;
     }
 
-    // Create a new <img> element
-    const img = document.createElement("img");
-    img.src = imageUrl; // Set the src to the image URL
-    img.alt = "Uploaded Image"; // Add a description for the image
+    const reader = new FileReader();
 
-    // Add the image to the gallery
-    const gallery = document.getElementById("gallery");
-    gallery.appendChild(img); // This will add the image to the page
+    // Event when the file is successfully read
+    reader.onload = function(e) {
+        const imageUrl = e.target.result; // The URL of the image file
+
+        // Create an image element and set the src to the image URL
+        const imgElement = document.createElement("img");
+        imgElement.src = imageUrl;
+        imgElement.alt = "Uploaded Image";
+        imgElement.style.maxWidth = "100%"; // To make sure the image fits the page
+        imgElement.style.marginTop = "20px";
+
+        // Display the image in the imageDisplay div
+        const imageDisplay = document.getElementById("imageDisplay");
+        imageDisplay.innerHTML = ""; // Clear previous images
+        imageDisplay.appendChild(imgElement);
+    }
+
+    // Read the file as a data URL (this will be the image URL)
+    reader.readAsDataURL(file);
 }
