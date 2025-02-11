@@ -1,32 +1,19 @@
-function uploadImage() {
-    const file = document.getElementById("fileInput").files[0];
-    if (!file) return alert("Please select an image!");
+function addImage() {
+    // Get the value of the image URL from the input field
+    const imageUrl = document.getElementById("imageUrlInput").value;
 
-    const formData = new FormData();
-    formData.append("image", file);
+    // Make sure the user entered something
+    if (!imageUrl) {
+        alert("Please enter a valid image URL!");
+        return;
+    }
 
-    fetch("https://api.imgur.com/3/upload", {
-        method: "POST",
-        headers: {
-            "Authorization": "Client-ID YOUR_IMGUR_CLIENT_ID"
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const imageUrl = data.data.link;
-            displayImage(imageUrl);
-        } else {
-            alert("Image upload failed.");
-        }
-    })
-    .catch(error => alert("Error uploading image"));
-}
-
-function displayImage(imageUrl) {
-    const gallery = document.getElementById("gallery");
+    // Create a new <img> element
     const img = document.createElement("img");
-    img.src = imageUrl;
-    gallery.appendChild(img);
+    img.src = imageUrl; // Set the src to the image URL
+    img.alt = "Uploaded Image"; // Add a description for the image
+
+    // Add the image to the gallery
+    const gallery = document.getElementById("gallery");
+    gallery.appendChild(img); // This will add the image to the page
 }
